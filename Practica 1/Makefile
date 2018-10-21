@@ -7,19 +7,22 @@ CFLAGS := -I$(DIRHEA) -c -Wall -ansi
 LDFLAGS := -lglut -lGLU -lGL
 CC := gcc
 
-all: dirs helloOpenGL test
+all: dirs helloOpenGL test ejercicio1
 
 dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
 
-helloOpenGL: $(DIROBJ)helloOpenGL.o 
+helloOpenGL: $(DIROBJ)helloOpenGL.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDFLAGS)
 
-test: $(DIROBJ)test.o 
+test: $(DIROBJ)test.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDFLAGS)
+
+ejercicio1: $(DIROBJ)ejercicio1.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDFLAGS)
 
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
-clean: 
+clean:
 	rm -rf *~ core $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~
