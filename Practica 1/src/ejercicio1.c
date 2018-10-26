@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
   glutInitWindowSize(400, 400);
   glutInitWindowPosition(200, 200);
 
-  glutCreateWindow("Hola Mundo con OpenGL!");
+  glutCreateWindow("Ejercico 1");
 
   init();
 
