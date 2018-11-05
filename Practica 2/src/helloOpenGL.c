@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <GL/glut.h>
 
 /* Función de renderizado */
@@ -37,7 +36,6 @@ void resize (int w, int h) {
 }
 
 void init (void) {
-  /* Profundidad*/
   glEnable(GL_DEPTH_TEST);
 }
 
@@ -54,7 +52,6 @@ int main(int argc, char *argv[]) {
 
   /* Registro de funciones de retrollamada */
   glutDisplayFunc(render);
-  /* Funcion que llama cuando se realiza una redimension de la pantalla */
   glutReshapeFunc(resize);
 
   /* Bucle de renderizado */

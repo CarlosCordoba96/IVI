@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include <GL/glut.h>
-
 /* Función de renderizado */
+static GLboolean color = 0;
 void render () {
   /* Limpieza de buffers */
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -12,14 +11,30 @@ void render () {
 
   /* Renderiza un triángulo blanco */
   glColor3f(1.0, 1.0, 1.0);
+  if(color){
+    glColor3f(1.0, 0.0, 0.0);
+  }
   glBegin(GL_TRIANGLES);
   glVertex3f(0.0, 1.0, 0.0);
+  if(color){
+      glColor3f(0.0, 1.0, 0.0);
+  }
   glVertex3f(-1.0, -1.0, 0.0);
+  if(color){
+    glColor3f(0.0,0.0, 1.0);
+  }
   glVertex3f(1.0, -1.0, 0.0);
   glEnd();
 
   /* Intercambio de buffers */
   glutSwapBuffers();
+}
+
+void teclado(unsigned char key, int x, int y){
+  if(key =='c'){
+    color=!color;
+  }
+  glutPostRedisplay();
 }
 
 void resize (int w, int h) {
@@ -37,7 +52,6 @@ void resize (int w, int h) {
 }
 
 void init (void) {
-  /* Profundidad*/
   glEnable(GL_DEPTH_TEST);
 }
 
@@ -54,8 +68,8 @@ int main(int argc, char *argv[]) {
 
   /* Registro de funciones de retrollamada */
   glutDisplayFunc(render);
-  /* Funcion que llama cuando se realiza una redimension de la pantalla */
   glutReshapeFunc(resize);
+   glutKeyboardFunc(teclado);
 
   /* Bucle de renderizado */
   glutMainLoop();
