@@ -25,6 +25,10 @@ planetario: $(DIROBJ)planetario.o
 ejercicio1:$(DIROBJ)ejercicio1.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
+ejercicio3:$(DIROBJ)ejercicio3.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
