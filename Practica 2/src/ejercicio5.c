@@ -1,6 +1,10 @@
 #include <GL/glut.h>
 
-static GLdouble rotate = 0.0;
+static GLdouble rotatex = 0.0;
+static GLdouble rotatey = 0.0;
+static GLdouble rotatez = 0.0;
+static GLchar sentido='l';
+static GLchar eje ='x';
 
 void render () {
   /* Limpieza de buffers */
@@ -9,7 +13,17 @@ void render () {
   glLoadIdentity();
   /* Posición de la cámara virtual (position, look, up) */
   gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-  glRotatef(rotate,1.0,0.0,0.0);
+  switch (eje){
+    case 'x':
+        glRotatef(rotatex,1.0,0.0,0.0);
+        break;
+    case 'y':
+        glRotatef(rotatey,0.0,1.0,0.0);
+        break;
+    case 'z':
+          glRotatef(rotatez,0.0,0.0,1.0);
+          break;
+      }
   /* En color blanco */
   glColor3f( 1.0, 1.0, 1.0 );
   /* Renderiza la tetera */
@@ -19,18 +33,56 @@ void render () {
 }
 
 void rotari(){
-    rotate=(rotate + 0.1);
+  if (sentido=='l'){
+    switch (eje){
+      case 'x':
+          rotatex=rotatex-0.1;
+          break;
+      case 'y':
+          rotatey=rotatey-0.1;
+          break;
+      case 'z':
+          rotatez=rotatez-0.1;
+            break;
+        }
+  }
+  if(sentido=='r'){
+    switch (eje){
+      case 'x':
+          rotatex=rotatex+0.1;
+          break;
+      case 'y':
+          rotatey=rotatey+0.1;
+          break;
+      case 'z':
+          rotatez=rotatez+0.1;
+            break;
+        }
+  }
     glutPostRedisplay();
 
 }
 
+void especiales(int key,int x, int y){
+if(key==GLUT_KEY_LEFT){
+sentido='l';
+}
+if(key==GLUT_KEY_RIGHT){
+  sentido='r';
+}
+}
+
+
 void teclado(unsigned char key, int x, int y){
-  if(key =='x'){
-    glutIdleFunc(rotari);
-  }
+
+
   if(key == 's'){
       glutIdleFunc(NULL);
+  }else{
+    eje=key;
+    glutIdleFunc(rotari);
   }
+
   glutPostRedisplay();
 }
 
@@ -61,6 +113,7 @@ int main (int argc, char* argv[]) {
   glutReshapeFunc(resize);
   /* Intercambio de buffers... Representation ---> Window */
    glutKeyboardFunc(teclado);
+   glutSpecialFunc(especiales);
   /* Bucle de renderizado */
   glutMainLoop();
 

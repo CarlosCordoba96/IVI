@@ -8,7 +8,10 @@ CC := gcc
 CFLAGS := -I$(DIRHEA) -c -Wall -ansi
 LDLIBS := `pkg-config --libs-only-l glu` -lglut
 
-all: dirs helloOpenGL tetera planetario ejercicio1
+all: dirs helloOpenGL tetera planetario ejercicios
+
+ejercicios: ejercicio1 ejercicio3 ejercicio4
+
 
 dirs:
 	$(MKDIR_P) $(DIROBJ) $(DIREXE)
@@ -28,7 +31,10 @@ ejercicio1:$(DIROBJ)ejercicio1.o
 ejercicio3:$(DIROBJ)ejercicio3.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
-
+ejercicio4:$(DIROBJ)ejercicio4.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+ejercicio5:$(DIROBJ)ejercicio5.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
