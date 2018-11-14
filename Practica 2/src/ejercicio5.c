@@ -13,17 +13,10 @@ void render () {
   glLoadIdentity();
   /* Posición de la cámara virtual (position, look, up) */
   gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-  switch (eje){
-    case 'x':
-        glRotatef(rotatex,1.0,0.0,0.0);
-        break;
-    case 'y':
-        glRotatef(rotatey,0.0,1.0,0.0);
-        break;
-    case 'z':
-          glRotatef(rotatez,0.0,0.0,1.0);
-          break;
-      }
+    glRotatef(rotatex,1.0,0.0,0.0);
+  glRotatef(rotatey,0.0,1.0,0.0);
+    glRotatef(rotatez,0.0,0.0,1.0);
+
   /* En color blanco */
   glColor3f( 1.0, 1.0, 1.0 );
   /* Renderiza la tetera */
@@ -33,32 +26,34 @@ void render () {
 }
 
 void rotari(){
+
   if (sentido=='l'){
-    switch (eje){
+    switch (eje) {
       case 'x':
-          rotatex=rotatex-0.1;
-          break;
+      rotatex=rotatex-0.1;
+      break;
       case 'y':
-          rotatey=rotatey-0.1;
-          break;
+    rotatey=rotatey-0.1;
+      break;
       case 'z':
-          rotatez=rotatez-0.1;
-            break;
-        }
-  }
-  if(sentido=='r'){
-    switch (eje){
+      rotatez=rotatez-0.1;
+      break;
+
+    }
+        }else if(sentido=='r'){
+    switch (eje) {
       case 'x':
-          rotatex=rotatex+0.1;
-          break;
+      rotatex=rotatex+0.1;
+      break;
       case 'y':
-          rotatey=rotatey+0.1;
-          break;
+    rotatey=rotatey+0.1;
+      break;
       case 'z':
-          rotatez=rotatez+0.1;
-            break;
-        }
+      rotatez=rotatez+0.1;
+      break;
+
   }
+}
     glutPostRedisplay();
 
 }
@@ -74,15 +69,22 @@ if(key==GLUT_KEY_RIGHT){
 
 
 void teclado(unsigned char key, int x, int y){
+  eje=key;
+switch (key) {
+  case 'x':
+  glutIdleFunc(rotari);
+  break;
+  case 'y':
+  glutIdleFunc(rotari);
+  break;
+  case 'z':
+  glutIdleFunc(rotari);
+  break;
+  case 's':
+  glutIdleFunc(NULL);
+  break;
 
-
-  if(key == 's'){
-      glutIdleFunc(NULL);
-  }else{
-    eje=key;
-    glutIdleFunc(rotari);
-  }
-
+}
   glutPostRedisplay();
 }
 
@@ -100,6 +102,7 @@ void resize (int w, int h) {
   /* Vuelta a transform. modelo */
   glMatrixMode(GL_MODELVIEW);
 }
+
 
 int main (int argc, char* argv[]) {
   glutInit( &argc, argv );

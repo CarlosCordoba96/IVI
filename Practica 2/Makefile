@@ -33,8 +33,22 @@ ejercicio3:$(DIROBJ)ejercicio3.o
 
 ejercicio4:$(DIROBJ)ejercicio4.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
 ejercicio5:$(DIROBJ)ejercicio5.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+ejercicio6:$(DIROBJ)ejercicio6.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+ejercicio6bis:$(DIROBJ)ejercicio6bis.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+ejercicio7:$(DIROBJ)ejercicio7.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+ejercicio8:$(DIROBJ)ejercicio8.o
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
