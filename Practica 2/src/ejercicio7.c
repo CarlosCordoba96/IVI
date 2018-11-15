@@ -2,7 +2,7 @@
 
 #define DIST_TIERRA 3
 #define DIST_LUNA 1
-#define DIST_LUNA_VERDE 2
+#define DIST_LUNA_VERDE 1.5
 
 static GLfloat tierra_rotacion = 0.0;
 static GLfloat tierra_orbita = 0.0;
@@ -42,16 +42,17 @@ void render () {
       glColor3ub (255, 0,0);
       glutWireSphere (0.15, 4, 4);
     glPopMatrix();
+    /*Transformaciones luna verde */
+        glRotatef(RLunaverde, 0.0, 0.0, 1.0);
+        glTranslatef(DIST_LUNA_VERDE, 0.0, 0.0);
+
+  /* Renderiza una luna verde */
+        glColor3ub (0,255,0);
+        glutWireSphere (0.18, 4, 4);
+      glPopMatrix();
 
 
-    /* Transformaciones de la luna verde */
-    glRotatef(RLunaverde, 0.0, 0.0, 1.0);
-    glTranslatef(DIST_LUNA_VERDE, 0.0, 0.0);
 
-   /* Renderiza una luna verde */
-    glColor3ub (0, 255, 0);
-    glutWireSphere (0.18, 6, 6);
- glPopMatrix();
   /* Intercambio de buffers... Representation ---> Window */
   glutSwapBuffers();
 }
@@ -75,7 +76,6 @@ void update (unsigned char key, int x, int y) {
   tierra_rotacion += 5.8;
   RLuna+=1;
   RLunaverde+=1.5;
-
   /* Fuerza re-dibujado */
   glutPostRedisplay();
 }

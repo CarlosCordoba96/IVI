@@ -37,9 +37,6 @@ ejercicio4:$(DIROBJ)ejercicio4.o
 ejercicio5:$(DIROBJ)ejercicio5.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
-ejercicio6:$(DIROBJ)ejercicio6.o
-	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
-
 ejercicio6bis:$(DIROBJ)ejercicio6bis.o
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
